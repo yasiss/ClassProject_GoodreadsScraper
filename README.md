@@ -1,3 +1,7 @@
 # CourseProject
 
-Please fork this repository and paste the github link of your fork on Microsoft CMT. Detailed instructions are on Coursera under Week 1: Course Project Overview/Week 9 Activities.
+The initial set up of this repository was forked from CS410Assignments/CourseProject.
+
+This repository was created as place holder for UIUC CS 410 - Text Transformation Systems, Fall 2021, Final Project.
+
+I will write a web scaper with Python to scrape Goodreads website.
