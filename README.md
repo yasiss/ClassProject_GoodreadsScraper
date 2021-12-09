@@ -10,7 +10,7 @@ This Project is a GoodReads website scraper that take all the newreleases by mon
 The content can be used for book recommandations and annual blog posts.
 
 **Methods**
-\\The Web scaraper was written with
+<br />The Web scaraper was written with
 - Python
 - on JupiterNotbook
 - Using Selenium and Beautifulsoup
