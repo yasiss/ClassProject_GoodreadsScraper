@@ -1,4 +1,4 @@
-# CourseProject
+# www.goodreads.com web scraper
 
 The initial set up (placeholder) of this repository was forked from CS410Assignments/CourseProject, holder for UIUC CS 410 - Text Transformation Systems, Fall 2021, Final Project.
 
