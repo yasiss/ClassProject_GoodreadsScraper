@@ -1,1 +1,214 @@
-<h1>Project Presentation</h1>
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<script src='https://d3js.org/d3.v5.min.js'></script>
+<!-- <style> rect {fill: lightblue; stroke: black; }</style> -->
+<!--  Yasaman Sabersheikh  -->
+<style> rect {stroke: black; }</style>
+
+<head>
+<title>Goodreads Highest Rating New Releases</title>
+
+<style>
+
+/* Style the body */
+body {
+  font-family: Garamond;
+}
+
+/* Header/Logo Title */
+.header {
+  padding: 1px;
+  text-align: center;
+  background: #d5e8f0;
+  color: grey;
+  font-size: 14px;
+  font-family:Garamond;
+}
+
+.axisx { font: 12px Garamond; }
+.axisy { font: 12px Garamond; }
+.axislabel { 
+	font: 12px Garamond; 
+	font-weight: bold;
+}
+
+.infonote
+{ 
+	font: 12px Garamond; 
+	font-weight: bold;
+}
+.tooltip1 { 
+	font: 12px Garamond; 
+	font-weight: bold;
+	transition: 0.3s;
+	opacity: 0;
+}
+.tooltip2 { 
+	font-family: Garamond; 
+	font-weight: bold;
+	text-align: left;125px;
+    background: #eee;
+	border-radius: 1px;
+	color: black;
+	padding: 8px;
+	font-size: 12px;
+	content: "\25BC";
+	display: inline;
+	box-sizing: border-box;
+    box-shadow: 0 0 5px #999999;  
+	opacity: 0;
+	position: absolute;
+	transition: 0.3s;
+	
+}
+
+select {
+  font-family: Garamond;
+}
+
+div.content p{
+    text-align: center;
+	color: CadetBlue;
+	font-weight: bold;
+	font-size: 18px;
+}
+.label1 { 
+	font: Garamond; 
+	font-weight: bold;
+	font-size: 10px;
+}
+.label2 { 
+	font: Garamond; 
+	font-weight: bold;
+	font-size: 10px;
+}
+
+/* Page Content */
+.content {padding:0px;}
+
+.to-from-lines { stroke: #4EA234; stroke-width: 4px; }
+
+#info-sidebar-container {
+  position: absolute; top: 225px; right: 20px; left: 800px;
+  width: 250px;
+  height 700px;
+  border-style: ridge;
+  font: Garamond; 
+  font-weight: bold;
+  font-size: 14px;
+  padding: 5px;
+  color: #2C2E2C;
+  background: 	#C1F2C5;
+  margin-right:30em;
+}
+#info-sidebar-container p { 
+text-align: left; 
+}
+
+.axis {
+	font: 10px Garamond;
+}
+
+
+.x.axis path {
+      display: none;
+}
+    
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #D4D8DA;
+  stroke-width: 2px;
+  shape-rendering: crispEdges;
+}
+
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
+
+.focus circle {
+  fill: #F1F3F3;
+  stroke: #6F257F;
+  stroke-width: 5px;
+}
+  
+.hover-line {
+  stroke: #6F257F;
+  stroke-width: 2px;
+  stroke-dasharray: 3,3;
+}
+  
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 2px;
+}
+
+.grid line {
+  stroke: lightgrey;
+  stroke-opacity: 0.7;
+  shape-rendering: crispEdges;
+}
+
+.grid path {
+  stroke-width: 0;
+}
+
+</style>
+
+
+<body onload='init()'>
+
+<div class="header">
+  <h2 font-family: "Garamond">I do believe something magical can happen when you read a good book!</h2>
+  <p text-align ="center-right">J.K. Rowling</p>
+</div>
+
+<div class="content"> 
+  <p id = "pagetitle">Highest Rating Books By Genre</p> 
+  <label id= "label1" for="selectYear" style="font-family:Garamond; color:gray;font-size:14px;font-weight:bold;margin-left:40em">Year</label>
+  <select id="selectYear"></select>  
+  <label id="label2" for="selectCat"  style="font-family:Garamond;color:gray;font-size:14px;font-weight:bold; text-align: right;margin-left:25em" >Book Genre</label>
+  <select id="selectCat"></select>
+</div>
+
+<svg width="98%" height="575" id="svg1">
+<text x="45%" y="27" fill="gray" font-weight="bold" font-family="Garamond" font-size="16px" text-align="center">Something here!!!!!!!</text> 
+</svg>
+<!-- <div id="info-sidebar-container" width="300" height="500" ></div> -->
+
+<script>
+
+async function init() {
+const data = await d3.csv( "http://localhost:8888/tree/Documents/1-%20Master%20MCS-DS%20UIUC/Semester%204/Text%20Information%20Systems/FinalProject/NewReleases.csv");
+
+var margin_m = {left:10, right:50, top:10, bottom:15}; //10
+var width = 300;
+var height = 300;
+
+var allGroup = d3.map(data, function(d){return(d.year)}).keys().sort(d3.descending);	
+					   
+var allCat = d3.map(data, function(d){return(d.genre)}).keys().sort(d3.ascending);	
+
+d3.select("#selectYear")
+                      .selectAll('option')
+     	              .data(allGroup)
+                      .enter()
+    	              .append('option')
+                      .text(function (d) { return d; }); // text showed in the menu
+
+d3.select("#selectCat")
+                      .selectAll('option')
+     	              .data(allCat)
+                      .enter()
+    	              .append('option')
+                      .text(function (d) { return d; });
+
+}
+
+</script>
+
+</body>
+</html>
