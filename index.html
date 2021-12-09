@@ -89,22 +89,6 @@ div.content p{
 
 .to-from-lines { stroke: #4EA234; stroke-width: 4px; }
 
-#info-sidebar-container {
-  position: absolute; top: 225px; right: 20px; left: 800px;
-  width: 250px;
-  height 700px;
-  border-style: ridge;
-  font: Garamond; 
-  font-weight: bold;
-  font-size: 14px;
-  padding: 5px;
-  color: #2C2E2C;
-  background: 	#C1F2C5;
-  margin-right:30em;
-}
-#info-sidebar-container p { 
-text-align: left; 
-}
 
 .axis {
 	font: 10px Garamond;
@@ -156,9 +140,9 @@ text-align: left;
   stroke-width: 0;
 }
 
-.objecttable td ,th{
+.tableobject td ,th{
     padding: 8px 4px;
-	border: 0.1px solid black;
+	border: 0.75px solid green;
 	border-collapse: collapse;
 }
 
@@ -175,31 +159,19 @@ text-align: left;
 
 <div class="content"> 
   <p id = "pagetitle">Top 5 Highest Rating Books By Genre</p> 
-  <label id= "label1" for="selectYear" style="font-family:Garamond; color:gray;font-size:14px;font-weight:bold;margin-left:37em">Year</label>
+  <label id= "label1" for="selectYear" style="font-family:Garamond; color:gray;font-size:16px;font-weight:bold;margin-left:30em">Year</label>
   <select id="selectYear"></select>  
-  <label id="label2" for="selectCat"  style="font-family:Garamond;color:gray;font-size:14px;font-weight:bold; text-align: right;margin-left:28em" >Book Genre</label>
+  <label id="label2" for="selectCat"  style="font-family:Garamond;color:gray;font-size:16px;font-weight:bold; text-align: right;margin-left:28em" >Book Genre</label>
   <select id="selectCat"></select>
 </div>
+
+<!--
 
 <svg width="98%" height="575" id="svg1">
 <text x="45%" y="27" fill="gray" font-weight="bold" font-family="Garamond" font-size="16px" text-align="center">Something here!!!!!!!</text> 
 </svg>
-<!-- <div id="info-sidebar-container" width="300" height="500" ></div> -->
 
-<table class="objecttable">
-  <tr>
-    <th>book_url</th>
-    <th>title</th>
-	<th>genre</th>
-	<th>author</th>
-	<th>rating</th>
-	<th>pages</th>
-	<th>year</th>
-	<th>published</th>
-  </tr>
- 
-</table>
-
+-->
 <script>
 
 async function init() {
@@ -213,50 +185,135 @@ var allGroup = d3.map(data, function(d){return(d.year)}).keys().sort(d3.descendi
 					   
 var allCat = d3.map(data, function(d){return(d.genre)}).keys().sort(d3.ascending);	
 
-//Load CSV first and only Map columns that I want
-var cols = data.map(function(d) {
-  return {
-	book_url: d.book_url,
-    title: d.title,
-	genre: d.genre,
-	author: d.author,
-	rating: d.rating,
-	pages: d.pages,
-	year: d.year,
-	published: d.published
-  }
-});
+var allData = d3.map(data, function(d){return(d[0])}).keys();	
+
+console.log(allData);
 
 d3.select("#selectYear")
                       .selectAll('option')
      	              .data(allGroup)
                       .enter()
     	              .append('option')
-                      .text(function (d) { return d; }); // text showed in the menu
+                      .text(function (d) { return d; }) // text showed in the menu
+					  .property("selected", function(d){ return d === 2021; });
 
 d3.select("#selectCat")
                       .selectAll('option')
      	              .data(allCat)
                       .enter()
     	              .append('option')
-                      .text(function (d) { return d; });
+                      .text(function (d) { return d; })
+					  .property("selected", function(d){ return d === 'fiction'; });
 					  
 var canvas = d3.select("#svg1")
 		 .attr("transform", "translate(" +margin_m.left+ "," + margin_m.top+ ")") 
 	     .attr("style", "outline: thin solid green;")
 	     .style("background-color", "#E8E8E8");
 
+//var table = canvas.append("xhtml:table");
 
-var tr = d3.select(".objecttable tbody")
-     .selectAll("tr")
-     .data(cols)
-     .enter().append("tr");
 
-var td = tr.selectAll("td")
-     .data(function(d, i) { return Object.values(d); })
-     .enter().append("td")
-     .text(function(d) { return d; });
+filtered = data.filter(function(d) { return parseInt(d.year) == 2021; })
+		 .filter(function(d) { return d.genre == "fiction"; });
 
+
+var tabulate = function (data,columns) {
+  var table = d3.select('body').append('table')
+            .attr("style", "margin-top: 100px")
+         //   .style("border-collapse", "collapse")         // <= Add this line in.
+            .style("border", "2px green solid")
+  
+  
+  
+	var thead = table.append('thead')
+	var tbody = table.append('tbody')
+
+	thead.append('tr')
+	  .selectAll('th')
+	    .data(columns)
+	    .enter()
+	  .append('th')
+	    .text(function (d) { return d })
+
+	var rows = tbody.selectAll('tr')
+	    .data(data)
+	    .enter()
+	  .append('tr')
+
+	var cells = rows.selectAll('td')
+	    .data(function(row) {
+	    	return columns.map(function (column) {
+	    		return { column: column, value: row[column] }
+	      })
+      })
+      .enter()
+    .append('td')
+      .text(function (d) { return d.value })
+	  
+	table.attr("class", "tableObj")
+	
+
+  return table;
+}
+
+var columns = ['book_url','title','genre','author','rating','pages','year','published']
+var mytable = tabulate(filtered ,columns);
+
+
+d3.select("mytable").enter().append("td").append("svg");
+
+
+
+//d3.csv("https://yasiss.github.io/CourseProject_GoodreadsScraper/data/TopFivePerGenre.csv", function (data) {
+//	var columns = ['book_url','title','genre','author','rating','pages','year','published']
+ // tabulate(data,columns)
+//})
+
+var draw = function(mydata) {
+	//console.log("draw() called.");
+
+	 
+
+
+};
+
+draw(data.filter(function(d) { return parseInt(d.year) == 2021; })
+		 .filter(function(d) { return d.genre == "fiction"; })
+);
+
+d3.select('#selectYear')
+  .on('change', function() {
+   // var bars = canvas.selectAll("rect");
+	//clearText();
+	d3.selectAll("table").remove();
+	
+    var year = eval(d3.select('#selectYear').property('value'));
+    var cat  = d3.select("#selectCat").node().value; 
+	 
+	var filteredData = data.filter(function(d) 
+					{return (d.genre == cat & parseInt(d.year) == parseInt(year));}
+)	
+
+draw(filteredData);
+
+});	
+	
+d3.select('#selectCat')
+  .on('change', function() {
+   // var bars = canvas.selectAll("rect");
+  //  bars.remove(); 	
+//	canvas.selectAll(".axisy").remove();
+//	clearText();
+	d3.selectAll("table").remove();
+    var year = eval(d3.select('#selectYear').property('value'));
+    var cat  = d3.select("#selectCat").node().value; 
+    var filteredData = data.filter(function(d) 
+                       {return (d.genre == cat & parseInt(d.year) == parseInt(year));}
+)	
+
+draw(filteredData);
+
+});	
 
 }
 
