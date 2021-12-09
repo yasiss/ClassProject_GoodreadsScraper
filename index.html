@@ -167,10 +167,10 @@ text-align: left;
 </div>
 
 <div class="content"> 
-  <p id = "pagetitle">Highest Rating Books By Genre</p> 
-  <label id= "label1" for="selectYear" style="font-family:Garamond; color:gray;font-size:14px;font-weight:bold;margin-left:40em">Year</label>
+  <p id = "pagetitle">Top 5 Highest Rating Books By Genre</p> 
+  <label id= "label1" for="selectYear" style="font-family:Garamond; color:gray;font-size:14px;font-weight:bold;margin-left:37em">Year</label>
   <select id="selectYear"></select>  
-  <label id="label2" for="selectCat"  style="font-family:Garamond;color:gray;font-size:14px;font-weight:bold; text-align: right;margin-left:25em" >Book Genre</label>
+  <label id="label2" for="selectCat"  style="font-family:Garamond;color:gray;font-size:14px;font-weight:bold; text-align: right;margin-left:28em" >Book Genre</label>
   <select id="selectCat"></select>
 </div>
 
@@ -182,7 +182,7 @@ text-align: left;
 <script>
 
 async function init() {
-const data = await d3.csv( "http://localhost:8888/tree/Documents/1-%20Master%20MCS-DS%20UIUC/Semester%204/Text%20Information%20Systems/FinalProject/NewReleases.csv");
+const data = await d3.csv( "https://yasiss.github.io/CourseProject_GoodreadsScraper/data/NewReleases.csv");
 
 var margin_m = {left:10, right:50, top:10, bottom:15}; //10
 var width = 300;
