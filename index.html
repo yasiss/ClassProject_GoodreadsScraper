@@ -185,7 +185,7 @@ var allGroup = d3.map(data, function(d){return(d.year)}).keys().sort(d3.descendi
 					   
 var allCat = d3.map(data, function(d){return(d.genre)}).keys().sort(d3.ascending);	
 
-var allData = d3.map(data, function(d){return(d[0])}).keys();	
+var allData = d3.map(data, function(d){return(d)}).keys();	
 
 console.log(allData);
 
@@ -216,12 +216,14 @@ var canvas = d3.select("#svg1")
 filtered = data.filter(function(d) { return parseInt(d.year) == 2021; })
 		 .filter(function(d) { return d.genre == "fiction"; });
 
+var columns = ['book_url','title','genre','author','rating','pages','year','published']
 
 var tabulate = function (data,columns) {
   var table = d3.select('body').append('table')
             .attr("style", "margin-top: 100px")
          //   .style("border-collapse", "collapse")         // <= Add this line in.
             .style("border", "2px green solid")
+			.style("word-wrap", "break-word");
   
   
   
@@ -256,11 +258,11 @@ var tabulate = function (data,columns) {
   return table;
 }
 
-var columns = ['book_url','title','genre','author','rating','pages','year','published']
+
 var mytable = tabulate(filtered ,columns);
 
 
-d3.select("mytable").enter().append("td").append("svg");
+d3.select("mytable").enter().append("mytable").append("svg");
 
 
 
@@ -269,23 +271,17 @@ d3.select("mytable").enter().append("td").append("svg");
  // tabulate(data,columns)
 //})
 
-var draw = function(mydata) {
-	//console.log("draw() called.");
-
-	 
 
 
-};
-
-draw(data.filter(function(d) { return parseInt(d.year) == 2021; })
-		 .filter(function(d) { return d.genre == "fiction"; })
-);
+//draw(data.filter(function(d) { return parseInt(d.year) == 2021; })
+//		 .filter(function(d) { return d.genre == "fiction"; })
+//);
 
 d3.select('#selectYear')
   .on('change', function() {
    // var bars = canvas.selectAll("rect");
 	//clearText();
-	d3.selectAll("table").remove();
+	d3.selectAll('table').remove();
 	
     var year = eval(d3.select('#selectYear').property('value'));
     var cat  = d3.select("#selectCat").node().value; 
@@ -294,7 +290,7 @@ d3.select('#selectYear')
 					{return (d.genre == cat & parseInt(d.year) == parseInt(year));}
 )	
 
-draw(filteredData);
+tabulate(filteredData,columns);
 
 });	
 	
@@ -304,14 +300,16 @@ d3.select('#selectCat')
   //  bars.remove(); 	
 //	canvas.selectAll(".axisy").remove();
 //	clearText();
-	d3.selectAll("table").remove();
+	d3.selectAll('table').remove();
+	
     var year = eval(d3.select('#selectYear').property('value'));
     var cat  = d3.select("#selectCat").node().value; 
+	
     var filteredData = data.filter(function(d) 
                        {return (d.genre == cat & parseInt(d.year) == parseInt(year));}
 )	
 
-draw(filteredData);
+tabulate(filteredData,columns);
 
 });	
 
