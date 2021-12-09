@@ -5,3 +5,7 @@ The initial set up of this repository was forked from CS410Assignments/CoursePro
 This repository was created as place holder for UIUC CS 410 - Text Transformation Systems, Fall 2021, Final Project.
 
 I will write a web scaper with Python to scrape Goodreads website, using Selenium and BeautifulSoup
+
+
+The website for the Visualization 
+https://yasiss.github.io/CourseProject_GoodreadsScraper/
