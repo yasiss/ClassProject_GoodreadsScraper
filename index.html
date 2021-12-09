@@ -156,6 +156,13 @@ text-align: left;
   stroke-width: 0;
 }
 
+.objecttable td ,th{
+    padding: 8px 4px;
+	border: 0.1px solid black;
+	border-collapse: collapse;
+}
+
+
 </style>
 
 
@@ -179,10 +186,24 @@ text-align: left;
 </svg>
 <!-- <div id="info-sidebar-container" width="300" height="500" ></div> -->
 
+<table class="objecttable">
+  <tr>
+    <th>book_url</th>
+    <th>title</th>
+	<th>genre</th>
+	<th>author</th>
+	<th>rating</th>
+	<th>pages</th>
+	<th>year</th>
+	<th>published</th>
+  </tr>
+ 
+</table>
+
 <script>
 
 async function init() {
-const data = await d3.csv( "https://yasiss.github.io/CourseProject_GoodreadsScraper/data/NewReleases.csv");
+const data = await d3.csv( "https://yasiss.github.io/CourseProject_GoodreadsScraper/data/TopFivePerGenre.csv");
 
 var margin_m = {left:10, right:50, top:10, bottom:15}; //10
 var width = 300;
@@ -191,6 +212,20 @@ var height = 300;
 var allGroup = d3.map(data, function(d){return(d.year)}).keys().sort(d3.descending);	
 					   
 var allCat = d3.map(data, function(d){return(d.genre)}).keys().sort(d3.ascending);	
+
+//Load CSV first and only Map columns that I want
+var cols = data.map(function(d) {
+  return {
+	book_url: d.book_url,
+    title: d.title,
+	genre: d.genre,
+	author: d.author,
+	rating: d.rating,
+	pages: d.pages,
+	year: d.year,
+	published: d.published
+  }
+});
 
 d3.select("#selectYear")
                       .selectAll('option')
@@ -205,6 +240,23 @@ d3.select("#selectCat")
                       .enter()
     	              .append('option')
                       .text(function (d) { return d; });
+					  
+var canvas = d3.select("#svg1")
+		 .attr("transform", "translate(" +margin_m.left+ "," + margin_m.top+ ")") 
+	     .attr("style", "outline: thin solid green;")
+	     .style("background-color", "#E8E8E8");
+
+
+var tr = d3.select(".objecttable tbody")
+     .selectAll("tr")
+     .data(cols)
+     .enter().append("tr");
+
+var td = tr.selectAll("td")
+     .data(function(d, i) { return Object.values(d); })
+     .enter().append("td")
+     .text(function(d) { return d; });
+
 
 }
 
