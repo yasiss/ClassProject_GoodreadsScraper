@@ -216,7 +216,7 @@ var canvas = d3.select("#svg1")
 filtered = data.filter(function(d) { return parseInt(d.year) == 2021; })
 		 .filter(function(d) { return d.genre == "fiction"; });
 
-var columns = ['Book URL','Title','Genre','Author','Rating','Pages','Year','Published']
+var columns = ['book_url','title','genre','author','rating','pages','year','published']
 
 var tabulate = function (data,columns) {
   var table = d3.select('body').append('table')
