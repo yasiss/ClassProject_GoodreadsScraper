@@ -5,13 +5,11 @@ The initial set up (placeholder) of this repository was forked from CS410Assignm
 I will write a web scaper with Python to scrape Goodreads website, using Selenium and BeautifulSoup
 
 ## Overview
-<br />
 <br />This Project is a GoodReads website scraper that take all the newreleases by month and genre in last 2 years from the website and gather the information about them and display the 5 highest rating ones.
 
 The content can be used for book recommandations and annual blog posts.
 
 ## Methods
-<br />
 <br />The Web scaraper was written with:
 - Python
 - on JupiterNotbook
