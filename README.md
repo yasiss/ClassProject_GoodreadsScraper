@@ -9,7 +9,7 @@ I created web scaper with Python to scrape Goodreads website, using Selenium and
 
 The content can be used for book recommandations and annual blog posts.
 
-Step by step explanation can be found in GoodreadsScraper_ProjectDoc.pdf file.
+Step by step explanation can be found in **GoodreadsScraper_ProjectDoc.pdf** file.
 
 ## Methods
 <br />The Web scaraper was written with:
