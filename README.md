@@ -24,3 +24,6 @@ Data access and user interface is done with:
 
 ## The website for the Visualization
 https://yasiss.github.io/CourseProject_GoodreadsScraper/
+
+## Presentation Link to Video
+https://uofi.box.com/s/bs4jceo5wpu01qdb3ssoh3zxfdmia4zd
