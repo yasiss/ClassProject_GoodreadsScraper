@@ -1,4 +1,4 @@
-# www.goodreads.com web scraper
+# www.goodreads.com Web Scraper
 
 The initial set up (placeholder) of this repository was forked from CS410Assignments/CourseProject, holder for UIUC CS 410 - Text Transformation Systems, Fall 2021, Final Project.
 
@@ -22,7 +22,7 @@ Data access and user interface is done with:
 - HTML
 - D3.js 
 
-## The website for the Visualization
+## The Website for the Visualization
 https://yasiss.github.io/CourseProject_GoodreadsScraper/
 
 ## Presentation Link to Video
