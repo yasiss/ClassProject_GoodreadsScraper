@@ -26,4 +26,4 @@ Data access and user interface is done with:
 https://yasiss.github.io/GoodreadsWebScraper/
 
 ## Presentation Link to Video
-https://uofi.box.com/s/bs4jceo5wpu01qdb3ssoh3zxfdmia4zd
+https://uofi.box.com/s/bs4jceo5wpu01qdb3ssoh3zxfdmia4zd (Only for UIUC Students)
