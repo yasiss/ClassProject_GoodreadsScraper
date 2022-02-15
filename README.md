@@ -17,7 +17,7 @@ Step by step explanation can be found in **GoodreadsScraper_ProjectDoc.pdf** fil
 - on JupiterNotbook
 - Using Selenium and Beautifulsoup
 
-Data access and user interface is done with:
+Data access and user interface visualization is done with:
 
 - HTML
 - D3.js 
